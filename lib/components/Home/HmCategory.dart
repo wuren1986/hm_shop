@@ -14,6 +14,7 @@ class _HmCategoryState extends State<HmCategory> {
     // 返回一个横向滚动组件，需要设置一个高度，否则无法显示
     return SizedBox(
       height: 100,
+      // ListView外层要包SizeBox或者Container组件确定高度，否则无法显示
       child: ListView.builder(
         scrollDirection: Axis.horizontal, // 横向排列
         itemCount: 10,
