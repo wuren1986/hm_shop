@@ -93,8 +93,8 @@ class _HmsliderState extends State<Hmslider> {
                   // 点击指示灯切换轮播图
                   _controller.animateToPage(i);
                 },
-                child: Container(
-                  // duration: Duration(milliseconds: 300),
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
                   height: 6,
                   width: i == _currentIndex ? 40 : 20,
                   margin: EdgeInsets.symmetric(horizontal: 4),
