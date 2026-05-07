@@ -1,8 +1,10 @@
 // 分类组件
 import 'package:flutter/material.dart';
+import 'package:hm_shop/viewmodels/home.dart';
 
 class HmCategory extends StatefulWidget {
-  HmCategory({Key? key}) : super(key: key);
+  final List<CategoryItem> categoryItems;
+  HmCategory({Key? key, required this.categoryItems}) : super(key: key);
 
   @override
   _HmCategoryState createState() => _HmCategoryState();
@@ -17,17 +19,28 @@ class _HmCategoryState extends State<HmCategory> {
       // ListView外层要包SizeBox或者Container组件确定高度，否则无法显示
       child: ListView.builder(
         scrollDirection: Axis.horizontal, // 横向排列
-        itemCount: 10,
+        itemCount: widget.categoryItems.length,
         itemBuilder: (context, index) {
+          // 从widget中获取分类列表数据
+          final category = widget.categoryItems[index];
           return Container(
             width: 80,
             height: 100,
-            color: Colors.blue,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 231, 232, 234),
+              borderRadius: BorderRadius.circular(40),
+            ),
             alignment: Alignment.center,
             margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "分类$index",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(category.picture ?? "", width: 40, height: 40),
+                Text(
+                  category.name ?? "",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
             ),
           );
         },
