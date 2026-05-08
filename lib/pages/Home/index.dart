@@ -100,10 +100,26 @@ class _HomeViewState extends State<HomeView> {
   // 推荐列表
   List<GoodDetailItem> _recommendList = [];
 
+  int _page = 1; // 页码
+  bool _isLoading = false; // 当前是否正在加载推荐列表数据，当前加载状态
+  bool _hasMore = true; // 是否还有下一页
+  int _pageSize = 8; // 每页数量
   // 获取推荐列表
   void _getRecommendList() async {
-    _recommendList = await getRecommendListAPI({"limit": 10});
+    // 当前正在加载推荐列表数据时，不重复加载 或 没有下一页数据了，则不进行加载
+    if (_isLoading || !_hasMore) {
+      return;
+    }
+    _isLoading = true; // 更新加载状态，开始加载
+    int requestLimit = _page * _pageSize;
+    _recommendList = await getRecommendListAPI({"limit": requestLimit});
+    _isLoading = false; // 更新加载状态，结束加载
     setState(() {});
+    if (_recommendList.length < requestLimit) {
+      _hasMore = false; // 更新是否还有下一页数据
+      return;
+    }
+    _page++; // 更新页码
   }
 
   @override
@@ -116,6 +132,21 @@ class _HomeViewState extends State<HomeView> {
     _getInVogueList();
     _getOneStopList();
     _getRecommendList();
+    _registerEvent();
+  }
+
+  // 监听滚动到底部的事件
+  void _registerEvent() {
+    // 监听滚动到底部的事件
+    _scrollController.addListener(() {
+      // _scrollController.position.pixels // 滚动距离
+      // _scrollController.position.maxScrollExtent; // 最大滚动距离
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 50) {
+        // 加载下一页数据
+        _getRecommendList();
+      }
+    });
   }
 
   // 获取轮播图数据
@@ -142,8 +173,13 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: _getScrollChildern()); // 必须是 sliver 家族的内容
+    return CustomScrollView(
+      slivers: _getScrollChildern(),
+      controller: _scrollController, // 绑定控制器
+    ); // 必须是 sliver 家族的内容
   }
 }

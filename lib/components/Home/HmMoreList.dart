@@ -86,6 +86,7 @@ class _HmMoreListState extends State<HmMoreList> {
   Widget build(BuildContext context) {
     // 必须是Sliver家族的组件
     return SliverGrid.builder(
+      // 懒加载、按需加载
       itemCount: widget.recommendList.length,
       gridDelegate:
           // 网格是两列
