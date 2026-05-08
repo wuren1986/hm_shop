@@ -102,3 +102,105 @@ class CategoryItem {
     );
   }
 }
+
+// 特惠推荐数据类型
+// result.subTypes[].goodsItems.items[] 对应的商品条目
+class GoodsItem {
+  String? id;
+  String? name;
+  String? desc;
+  String? price;
+  String? picture;
+  int? orderNum;
+  GoodsItem({
+    required this.id,
+    required this.name,
+    this.desc,
+    required this.price,
+    required this.picture,
+    required this.orderNum,
+  });
+  factory GoodsItem.fromJson(Map<String, dynamic> json) {
+    return GoodsItem(
+      id: json["id"] ?? "",
+      name: json["name"] ?? "",
+      desc: json["desc"],
+      price: json["price"] ?? "",
+      picture: json["picture"] ?? "",
+      orderNum: json["orderNum"] ?? 0,
+    );
+  }
+}
+
+// result.subTypes[].goodsItems 对应的分页商品列表
+class GoodsItems {
+  int? counts;
+  int? pageSize;
+  int? pages;
+  int? page;
+  List<GoodsItem>? items;
+  GoodsItems({
+    required this.counts,
+    required this.pageSize,
+    required this.pages,
+    required this.page,
+    required this.items,
+  });
+  factory GoodsItems.fromJson(Map<String, dynamic> json) {
+    return GoodsItems(
+      counts: json["counts"] ?? 0,
+      pageSize: json["pageSize"] ?? 0,
+      pages: json["pages"] ?? 0,
+      page: json["page"] ?? 0,
+      items:
+          (json["items"] as List?)
+              ?.map<GoodsItem>((e) => GoodsItem.fromJson(e))
+              .toList() ??
+          [],
+    );
+  }
+}
+
+// result.subTypes[] 对应的子分类
+class SubTypeItem {
+  String? id;
+  String? title;
+  GoodsItems? goodsItems;
+  SubTypeItem({
+    required this.id,
+    required this.title,
+    required this.goodsItems,
+  });
+  factory SubTypeItem.fromJson(Map<String, dynamic> json) {
+    return SubTypeItem(
+      id: json["id"] ?? "",
+      title: json["title"] ?? "",
+      goodsItems: json["goodsItems"] == null
+          ? null
+          : GoodsItems.fromJson(json["goodsItems"]),
+    );
+  }
+}
+
+// result 对应的特惠推荐顶层数据
+class RecommendResult {
+  String? id;
+  String? title;
+  List<SubTypeItem> subTypes;
+  RecommendResult({
+    required this.id,
+    required this.title,
+    required this.subTypes,
+  });
+  factory RecommendResult.fromJson(Map<String, dynamic> json) {
+    return RecommendResult(
+      id: json["id"] ?? "",
+      title: json["title"] ?? "",
+      subTypes:
+          (json["subTypes"] as List?)
+              ?.map<SubTypeItem>((e) => SubTypeItem.fromJson(e))
+              .toList() ??
+          [],
+    );
+  }
+}

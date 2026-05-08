@@ -21,3 +21,26 @@ Future<List<CategoryItem>> getCategoryListAPI() async {
     return CategoryItem.fromJson(item as Map<String, dynamic>);
   }).toList();
 }
+
+// 获取特惠推荐
+Future<RecommendResult> getRecommendListAPI() async {
+  return RecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.PRODUCT_LIST),
+  );
+}
+
+// 热榜推荐
+Future<RecommendResult> getInVogueListAPI() async {
+  // 返回请求
+  return RecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.IN_VOGUE_LIST),
+  );
+}
+
+// 一站式推荐
+Future<RecommendResult> getOneStopListAPI() async {
+  // 返回请求
+  return RecommendResult.fromJson(
+    await dioRequest.get(HttpConstants.ONE_STOP_LIST),
+  );
+}

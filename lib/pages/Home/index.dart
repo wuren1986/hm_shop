@@ -32,6 +32,8 @@ class _HomeViewState extends State<HomeView> {
   ];
   // 分类列表数据列表
   List<CategoryItem> _categoryItems = [];
+  // 特惠推荐数据
+  RecommendResult? _recommendResult;
 
   // 获取滚动容器的内容
   List<Widget> _getScrollChildern() {
@@ -44,7 +46,9 @@ class _HomeViewState extends State<HomeView> {
         child: HmCategory(categoryItems: _categoryItems),
       ), // 分类组件
       SliverToBoxAdapter(child: SizedBox(height: 10)), // 间距主键
-      SliverToBoxAdapter(child: HmSuggestion()), // 推荐组件
+      SliverToBoxAdapter(
+        child: HmSuggestion(recommendResult: _recommendResult),
+      ), // 推荐组件
       SliverToBoxAdapter(child: SizedBox(height: 10)), // 间距主键
       SliverToBoxAdapter(
         child: Padding(
@@ -52,9 +56,13 @@ class _HomeViewState extends State<HomeView> {
           child: Flex(
             direction: Axis.horizontal,
             children: [
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(result: _inVogueResult, type: "hot"),
+              ),
               SizedBox(width: 10),
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(result: _oneStopResult, type: "step"),
+              ),
             ],
           ),
         ),
@@ -64,12 +72,40 @@ class _HomeViewState extends State<HomeView> {
     ];
   }
 
+  // 热榜推荐
+  RecommendResult _inVogueResult = RecommendResult(
+    id: "",
+    title: "",
+    subTypes: [],
+  );
+  // 一站式推荐
+  RecommendResult _oneStopResult = RecommendResult(
+    id: "",
+    title: "",
+    subTypes: [],
+  );
+
+  // 获取热榜推荐列表
+  void _getInVogueList() async {
+    _inVogueResult = await getInVogueListAPI();
+    setState(() {});
+  }
+
+  // 获取一站式推荐列表
+  void _getOneStopList() async {
+    _oneStopResult = await getOneStopListAPI();
+    setState(() {});
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _getBannerList();
     _getCategoryList();
+    _getRecommendList();
+    _getInVogueList();
+    _getOneStopList();
   }
 
   // 获取轮播图数据
@@ -85,6 +121,14 @@ class _HomeViewState extends State<HomeView> {
     final categoryList = await getCategoryListAPI();
     setState(() {
       _categoryItems = categoryList;
+    });
+  }
+
+  // 获取特惠推荐数据
+  Future<void> _getRecommendList() async {
+    final recommendResult = await getRecommendListAPI();
+    setState(() {
+      _recommendResult = recommendResult;
     });
   }
 
