@@ -23,7 +23,7 @@ Future<List<CategoryItem>> getCategoryListAPI() async {
 }
 
 // 获取特惠推荐
-Future<RecommendResult> getRecommendListAPI() async {
+Future<RecommendResult> getProductListAPI() async {
   return RecommendResult.fromJson(
     await dioRequest.get(HttpConstants.PRODUCT_LIST),
   );
@@ -43,4 +43,17 @@ Future<RecommendResult> getOneStopListAPI() async {
   return RecommendResult.fromJson(
     await dioRequest.get(HttpConstants.ONE_STOP_LIST),
   );
+}
+
+// 推荐列表
+Future<List<GoodDetailItem>> getRecommendListAPI(
+  Map<String, dynamic> params,
+) async {
+  // 返回请求
+  return ((await dioRequest.get(HttpConstants.RECOMMEND_LIST, params: params))
+          as List)
+      .map((item) {
+        return GoodDetailItem.formJSON(item as Map<String, dynamic>);
+      })
+      .toList();
 }
