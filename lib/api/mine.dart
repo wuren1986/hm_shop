@@ -7,5 +7,5 @@ Future<GoodsDetailItems> getGuessListAPI(Map<String, dynamic> params) async {
     HttpConstants.GUESS_LIST,
     params: params,
   );
-  return GoodsDetailItems.formJSON(response);
+  return GoodsDetailItems.fromJSON(response);
 }

@@ -4,7 +4,7 @@ class BannerItem {
   String? imgUrl;
   BannerItem({required this.id, required this.imgUrl});
   // 扩展一个工厂函数，一般使用factory来声明，一般用来创建实例对象
-  factory BannerItem.formJSON(Map<String, dynamic> json) {
+  factory BannerItem.fromJSON(Map<String, dynamic> json) {
     return BannerItem(id: json["id"] ?? "", imgUrl: json["imgUrl"] ?? "");
   }
 }
@@ -84,7 +84,7 @@ class CategoryItem {
     this.goods,
   });
   // 扩展一个工厂函数，一般使用factory来声明，一般用来创建实例对象
-  factory CategoryItem.formJSON(Map<String, dynamic> json) {
+  factory CategoryItem.fromJSON(Map<String, dynamic> json) {
     return CategoryItem(
       id: json["id"] ?? "",
       name: json["name"] ?? "",
@@ -92,12 +92,12 @@ class CategoryItem {
       children: json["children"] == null
           ? []
           : (json["children"] as List)
-                .map<CategoryItem>((e) => CategoryItem.formJSON(e))
+                .map<CategoryItem>((e) => CategoryItem.fromJSON(e))
                 .toList(),
       goods: json["goods"] == null
           ? []
           : (json["goods"] as List)
-                .map<CategoryItem>((e) => CategoryItem.formJSON(e))
+                .map<CategoryItem>((e) => CategoryItem.fromJSON(e))
                 .toList(),
     );
   }
@@ -120,7 +120,7 @@ class GoodsItem {
     required this.picture,
     required this.orderNum,
   });
-  factory GoodsItem.formJSON(Map<String, dynamic> json) {
+  factory GoodsItem.fromJSON(Map<String, dynamic> json) {
     return GoodsItem(
       id: json["id"] ?? "",
       name: json["name"] ?? "",
@@ -146,7 +146,7 @@ class GoodsItems {
     required this.page,
     required this.items,
   });
-  factory GoodsItems.formJSON(Map<String, dynamic> json) {
+  factory GoodsItems.fromJSON(Map<String, dynamic> json) {
     return GoodsItems(
       counts: json["counts"] ?? 0,
       pageSize: json["pageSize"] ?? 0,
@@ -154,7 +154,7 @@ class GoodsItems {
       page: json["page"] ?? 0,
       items:
           (json["items"] as List?)
-              ?.map<GoodsItem>((e) => GoodsItem.formJSON(e))
+              ?.map<GoodsItem>((e) => GoodsItem.fromJSON(e))
               .toList() ??
           [],
     );
@@ -171,13 +171,13 @@ class SubTypeItem {
     required this.title,
     required this.goodsItems,
   });
-  factory SubTypeItem.formJSON(Map<String, dynamic> json) {
+  factory SubTypeItem.fromJSON(Map<String, dynamic> json) {
     return SubTypeItem(
       id: json["id"] ?? "",
       title: json["title"] ?? "",
       goodsItems: json["goodsItems"] == null
           ? null
-          : GoodsItems.formJSON(json["goodsItems"]),
+          : GoodsItems.fromJSON(json["goodsItems"]),
     );
   }
 }
@@ -192,13 +192,13 @@ class RecommendResult {
     required this.title,
     required this.subTypes,
   });
-  factory RecommendResult.formJSON(Map<String, dynamic> json) {
+  factory RecommendResult.fromJSON(Map<String, dynamic> json) {
     return RecommendResult(
       id: json["id"] ?? "",
       title: json["title"] ?? "",
       subTypes:
           (json["subTypes"] as List?)
-              ?.map<SubTypeItem>((e) => SubTypeItem.formJSON(e))
+              ?.map<SubTypeItem>((e) => SubTypeItem.fromJSON(e))
               .toList() ??
           [],
     );
@@ -218,7 +218,7 @@ class GoodDetailItem extends GoodsItem {
     required this.payCount,
   }) : super(desc: "");
   // 转化方法
-  factory GoodDetailItem.formJSON(Map<String, dynamic> json) {
+  factory GoodDetailItem.fromJSON(Map<String, dynamic> json) {
     return GoodDetailItem(
       id: json["id"]?.toString() ?? "",
       name: json["name"]?.toString() ?? "",
@@ -243,7 +243,7 @@ class GoodsDetailItems {
     required this.page,
     required this.items,
   });
-  factory GoodsDetailItems.formJSON(Map<String, dynamic> json) {
+  factory GoodsDetailItems.fromJSON(Map<String, dynamic> json) {
     return GoodsDetailItems(
       counts: json["counts"] ?? 0,
       pageSize: json["pageSize"] ?? 0,
@@ -251,7 +251,7 @@ class GoodsDetailItems {
       page: json["page"] ?? 0,
       items:
           (json["items"] as List?)
-              ?.map<GoodDetailItem>((e) => GoodDetailItem.formJSON(e))
+              ?.map<GoodDetailItem>((e) => GoodDetailItem.fromJSON(e))
               .toList() ??
           [],
     );
