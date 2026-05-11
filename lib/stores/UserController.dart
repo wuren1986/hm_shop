@@ -16,7 +16,7 @@ import 'package:hm_shop/viewmodels/user.dart';
 
 // 需要共享的对象 要有一些共享的属性 属性需要响应式更新
 class UserController extends GetxController {
-  var user = UserInfo.fromJSON({}).obs; // user对象被监听
+  var user = UserInfo.fromJSON({}).obs; // .obs表示该数据为响应式数据，user对象被监听
   // 想要取 obs 装饰的对象值 需要通过 user.value
   // 更新用户信息
   updateUserInfo(UserInfo newUser) {
