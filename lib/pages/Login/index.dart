@@ -75,6 +75,8 @@ class _LoginPageState extends State<LoginPage> {
   _login() async {
     // 调用登录接口
     try {
+      // 账号：13200000001 - 13200000010
+      // 密码：123456
       final res = await loginAPI({
         "account": _phoneController.text,
         "password": _codeController.text,
