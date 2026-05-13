@@ -83,9 +83,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // SafeArea 安全区域 避免导航栏遮挡内容
-      body: SafeArea(
-        child: IndexedStack(index: _currentIndex, children: _getChildWidget()),
-      ),
+      // body: SafeArea(
+      //   child: IndexedStack(index: _currentIndex, children: _getChildWidget()),
+      // ),
+      body: IndexedStack(index: _currentIndex, children: _getChildWidget()),
       bottomNavigationBar: BottomNavigationBar(
         // 底部导航栏
         items: _getTabBarWidget(),

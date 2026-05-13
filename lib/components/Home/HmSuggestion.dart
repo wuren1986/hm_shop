@@ -25,39 +25,41 @@ class _HmSuggestionState extends State<HmSuggestion> {
   List<Widget> _getChildrenList() {
     List<GoodsItem> list = _getDisplayItems(); // 取到前3条数据
     return list.map((item) {
-      return Column(
-        children: [
-          // ClipRRect 可以包裹子元素 裁剪图片设置圆角
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              errorBuilder: (context, error, stackTrace) {
-                // 当图片加载失败时，返回默认图片
-                return Image.asset(
-                  "lib/assets/home_cmd_inner.png",
-                  width: 100,
-                  height: 140,
-                );
-              },
-              item.picture ?? '',
-              width: 100,
-              height: 140,
-              fit: BoxFit.cover,
+      return Expanded(
+        child: Column(
+          children: [
+            // ClipRRect 可以包裹子元素 裁剪图片设置圆角
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                errorBuilder: (context, error, stackTrace) {
+                  // 当图片加载失败时，返回默认图片
+                  return Image.asset(
+                    "lib/assets/home_cmd_inner.png",
+                    width: 100,
+                    height: 140,
+                  );
+                },
+                item.picture ?? '',
+                width: 100,
+                height: 140,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            child: Text(
-              "￥${item.price}",
-              style: TextStyle(color: Colors.white),
+            SizedBox(height: 10),
+            Container(
+              child: Text(
+                "￥${item.price}",
+                style: TextStyle(color: Colors.white),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: const Color.fromARGB(255, 240, 96, 12),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
             ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: const Color.fromARGB(255, 240, 96, 12),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          ),
-        ],
+          ],
+        ),
       );
     }).toList();
   }
@@ -126,8 +128,10 @@ class _HmSuggestionState extends State<HmSuggestion> {
             Row(
               children: [
                 _buildLeft(),
+                SizedBox(width: 10),
                 Expanded(
                   child: Row(
+                    spacing: 10,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: _getChildrenList(),
                   ),

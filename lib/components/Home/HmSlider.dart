@@ -68,7 +68,7 @@ class _HmsliderState extends State<Hmslider> {
   // 返回搜索框组件
   Widget _getSearch() {
     return Positioned(
-      top: 10,
+      top: MediaQuery.of(context).padding.top,
       left: 0,
       right: 0,
       child: Padding(
