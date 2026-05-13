@@ -7,7 +7,7 @@ class HmHot extends StatefulWidget {
   // 类型
   final String type;
   // 一站式推荐
-  HmHot({Key? key, required this.result, required this.type}) : super(key: key);
+  const HmHot({super.key, required this.result, required this.type});
 
   @override
   _HmHotState createState() => _HmHotState();
@@ -16,8 +16,8 @@ class HmHot extends StatefulWidget {
 class _HmHotState extends State<HmHot> {
   // 获取前两条数据
   List<GoodsItem> _getDisplayItems() {
-    if (widget.result == null || widget.result!.subTypes.isEmpty) return [];
-    return widget.result!.subTypes.first.goodsItems?.items!.take(2).toList() ??
+    if (widget.result.subTypes.isEmpty) return [];
+    return widget.result.subTypes.first.goodsItems?.items!.take(2).toList() ??
         [];
   }
 

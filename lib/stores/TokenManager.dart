@@ -1,16 +1,14 @@
 import 'package:hm_shop/constants/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/**
- * 持久化Token
-* 1.安装shared_preferences插件
-* 2.封装一个TokenManager工具，具备初始化/设置/获取/删除方法
-* 3.登录成功将token写入持久化
-* 4.封装获取用户信息API
-* 5.Dio在请求工具中进行token注入
-* 在应用首页判断token获取状态赋值Getx数据	
-* 调整我的页面的Getx的put方式为find方式
- */
+/// 持久化Token
+/// 1.安装shared_preferences插件
+/// 2.封装一个TokenManager工具，具备初始化/设置/获取/删除方法
+/// 3.登录成功将token写入持久化
+/// 4.封装获取用户信息API
+/// 5.Dio在请求工具中进行token注入
+/// 在应用首页判断token获取状态赋值Getx数据
+/// 调整我的页面的Getx的put方式为find方式
 
 class TokenManager {
   // 返回持久化对象的实例对象

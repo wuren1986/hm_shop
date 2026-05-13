@@ -5,7 +5,7 @@ class HmMoreList extends StatefulWidget {
   // 推荐列表
   final List<GoodDetailItem> recommendList;
 
-  HmMoreList({Key? key, required this.recommendList}) : super(key: key);
+  const HmMoreList({super.key, required this.recommendList});
 
   @override
   _HmMoreListState createState() => _HmMoreListState();

@@ -9,7 +9,7 @@ import 'package:hm_shop/stores/TokenManager.dart';
 import 'package:hm_shop/stores/UserController.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -71,7 +71,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   final UserController _userController = Get.put(UserController());
-  _initUser() async {
+  Future<void> _initUser() async {
     await tokenManager.init(); // 初始化token
     if (tokenManager.getToken().isNotEmpty) {
       // 有token则获取用户信息

@@ -4,7 +4,7 @@ import 'package:hm_shop/viewmodels/home.dart';
 
 class HmSuggestion extends StatefulWidget {
   final RecommendResult? recommendResult;
-  HmSuggestion({Key? key, this.recommendResult}) : super(key: key);
+  const HmSuggestion({super.key, this.recommendResult});
 
   @override
   _HmSuggestionState createState() => _HmSuggestionState();
@@ -14,8 +14,9 @@ class _HmSuggestionState extends State<HmSuggestion> {
   // 取前3条数据
   List<GoodsItem> _getDisplayItems() {
     if (widget.recommendResult == null ||
-        widget.recommendResult!.subTypes.isEmpty)
+        widget.recommendResult!.subTypes.isEmpty) {
       return [];
+    }
     return widget.recommendResult!.subTypes.first.goodsItems?.items!
             .take(3)
             .toList() ??
@@ -48,15 +49,15 @@ class _HmSuggestionState extends State<HmSuggestion> {
             ),
             SizedBox(height: 10),
             Container(
-              child: Text(
-                "￥${item.price}",
-                style: TextStyle(color: Colors.white),
-              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: const Color.fromARGB(255, 240, 96, 12),
               ),
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
+              child: Text(
+                "￥${item.price}",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

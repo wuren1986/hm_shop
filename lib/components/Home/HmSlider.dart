@@ -4,26 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:hm_shop/viewmodels/home.dart';
 
 // 安装轮播图插件 flutter pub add carousel_slider
-/**
- * 获取轮播图数据，步骤
- * 1.安装dio：flutter pub add dio
- * 2.定义常量数据、基础地址、超时时间、业务状态、请求地址
- * 3.封装网络请求工具，基础地址，拦截器
- * 4.请求工具进一步结构，处理http状态和业务状态
- * 5.类工厂转化动态类型到对象类型
- * 6.封装请求API调用工厂函数
- * 7.初始化数据更新状态
- * 
- * 接口基础地址：https://meikou-api.itheima.net
- * 轮播图地址（get）：https://meikou-api.itheima.net/home/banner
- * 
- * 
- */
+/// 获取轮播图数据，步骤
+/// 1.安装dio：flutter pub add dio
+/// 2.定义常量数据、基础地址、超时时间、业务状态、请求地址
+/// 3.封装网络请求工具，基础地址，拦截器
+/// 4.请求工具进一步结构，处理http状态和业务状态
+/// 5.类工厂转化动态类型到对象类型
+/// 6.封装请求API调用工厂函数
+/// 7.初始化数据更新状态
+///
+/// 接口基础地址：https://meikou-api.itheima.net
+/// 轮播图地址（get）：https://meikou-api.itheima.net/home/banner
+///
+///
 
 class Hmslider extends StatefulWidget {
   final List<BannerItem> bannerList;
 
-  Hmslider({Key? key, required this.bannerList}) : super(key: key);
+  const Hmslider({super.key, required this.bannerList});
 
   @override
   _HmsliderState createState() => _HmsliderState();
@@ -31,7 +29,7 @@ class Hmslider extends StatefulWidget {
 
 class _HmsliderState extends State<Hmslider> {
   // 轮播图控制器
-  CarouselSliderController _controller = CarouselSliderController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   // 当前轮播图激活的索引
   int _currentIndex = 0;

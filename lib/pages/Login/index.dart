@@ -8,15 +8,17 @@ import 'package:hm_shop/utils/LoadingDialog.dart';
 import 'package:hm_shop/utils/ToastUtils.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _phoneController = TextEditingController(); // 账号控制器
-  TextEditingController _codeController = TextEditingController(); // 密码控制器
+  final TextEditingController _phoneController =
+      TextEditingController(); // 账号控制器
+  final TextEditingController _codeController =
+      TextEditingController(); // 密码控制器
   final UserController _userController = Get.find(); // 寻找对象
 
   // 用户账号Widget
@@ -78,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // 登录方法
-  _login() async {
+  Future<void> _login() async {
     // 调用登录接口
     try {
       LoadingDialog.show(context, message: "努力登录中"); // 显示加载弹窗

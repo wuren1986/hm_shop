@@ -9,7 +9,7 @@ import 'package:hm_shop/utils/ToastUtils.dart';
 import 'package:hm_shop/viewmodels/home.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -104,7 +104,7 @@ class _HomeViewState extends State<HomeView> {
   int _page = 1; // 页码
   bool _isLoading = false; // 当前是否正在加载推荐列表数据，当前加载状态
   bool _hasMore = true; // 是否还有下一页
-  int _pageSize = 8; // 每页数量
+  final int _pageSize = 8; // 每页数量
   // 获取推荐列表
   Future<void> _getRecommendList() async {
     // 当前正在加载推荐列表数据时，不重复加载 或 没有下一页数据了，则不进行加载

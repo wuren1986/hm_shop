@@ -25,11 +25,9 @@ class DioRequest {
         // 请求拦截器
         onRequest: (request, handler) {
           // 注入token到请求头
-          if (tokenManager.getToken() != null) {
-            // 有token，添加到请求头
-            request.headers["Authorization"] =
-                "Bearer ${tokenManager.getToken()}";
-          }
+          // 有token，添加到请求头
+          request.headers["Authorization"] =
+              "Bearer ${tokenManager.getToken()}";
           return handler.next(request);
         },
         // 响应拦截器

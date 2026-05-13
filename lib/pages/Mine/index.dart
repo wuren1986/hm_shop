@@ -8,7 +8,7 @@ import 'package:hm_shop/stores/UserController.dart';
 import 'package:hm_shop/viewmodels/home.dart';
 
 class MineView extends StatefulWidget {
-  MineView({Key? key}) : super(key: key);
+  const MineView({super.key});
 
   @override
   _MineViewState createState() => _MineViewState();
@@ -249,8 +249,8 @@ class _MineViewState extends State<MineView> {
     );
   }
 
-  List<GoodDetailItem> _list = [];
-  Map<String, dynamic> _params = {"page": 1, "pageSize": 10};
+  final List<GoodDetailItem> _list = [];
+  final Map<String, dynamic> _params = {"page": 1, "pageSize": 10};
 
   @override
   void initState() {
